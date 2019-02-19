@@ -1,0 +1,5 @@
+print('Hello Bot')
+print('---------')
+print()
+name = input('Hi! What is your name? ')
+print("Hello,", name + "!")
