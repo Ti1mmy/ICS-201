@@ -1,6 +1,6 @@
-total_cents = 545
-toonies = 545 // 200
-remainder_toonies = 545 % 200
+total_cents = int(input('Number of cents: '))
+toonies = total_cents // 200
+remainder_toonies = total_cents % 200
 loonies = remainder_toonies // 100
 remainder_loonies = remainder_toonies % 100
 quarters = remainder_loonies // 25
@@ -43,7 +43,7 @@ elif nickels == 0:
     print(f'{nickels} - nickels')
 if pennies > 1:
     print(f'{pennies} - pennies')
-elif toonies == 1:
+elif pennies == 1:
     print(f'{pennies} - penny')
-elif toonies == 0:
+elif pennies == 0:
     print(f'{pennies} - pennies')
