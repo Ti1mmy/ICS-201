@@ -27,7 +27,7 @@ def on_mouse_press(x, y, button, modifiers):
 
 
 def setup():
-    arcade.open_window(WIDTH, HEIGHT, "Arcade Test")
+    arcade.open_window(WIDTH, HEIGHT, "Pine trees")
     arcade.set_background_color(arcade.color.WHITE)
     arcade.schedule(update, 1/60)
 
