@@ -21,7 +21,7 @@ def on_draw():
     for i in range(START_X, END_X, DIST):
         x += DIST
         arcade.draw_rectangle_filled(x, y + 20, 20, 60, arcade.color.DARK_BROWN)
-        arcade.draw_triangle_filled(x, y + 170, x - 35, y + 50, x + 35,y + 50, arcade.color.PINE_GREEN)
+        arcade.draw_triangle_filled(x, y + 170, x - 35, y + 50, x + 35, y + 50, arcade.color.PINE_GREEN)
 def on_key_press(key, modifiers):
     pass
 
