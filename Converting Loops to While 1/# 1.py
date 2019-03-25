@@ -1,5 +1,6 @@
 my_str = 'hello'
-char = 1
-while char <= len(my_str):
-    print(my_str[char - 1])
-    char += 1
+i = 1
+while i <= len(my_str):
+    char = my_str[i - 1]
+    print(char)
+    i += 1

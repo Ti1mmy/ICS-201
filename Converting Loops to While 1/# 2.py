@@ -1,5 +1,6 @@
 numbers = [7, 7, 2, 7, 11]
-length = 0
-while length < len(numbers):
-    print(numbers[length])
-    length += 1
+i = 0
+while i < len(numbers):
+    num = numbers[i]
+    print(num)
+    i += 1
