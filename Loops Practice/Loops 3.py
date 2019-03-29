@@ -23,4 +23,4 @@ for item in range(item_number - 1):
     print(f'    ${(items[item]):.2f}{spaces_items}${((items[item]) * 1.15):.2f}')
 print('-------------------------------')
 print('    Subtotal:        Total:')
-print(f'    ${subtotal:.2f}{spaces_subtotal}${(subtotal * 1.15):.2f}')
+print(f'${subtotal:.2f}{spaces_subtotal}${(subtotal * 1.15):.2f}')
