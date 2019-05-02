@@ -1,7 +1,6 @@
 import arcade
 from playsound import playsound
 import random
-import os
 
 WIDTH = 640
 HEIGHT = 480
@@ -10,7 +9,7 @@ button = False
 color = arcade.color.RED
 text = 'Useless Button'
 message_color = arcade.color.WHITE
-rr = 1
+rr = -1
 toggle_button = arcade.color.RED
 toggle_text = "OFF"
 
@@ -49,18 +48,15 @@ def on_mouse_press(x, y, key, modifiers):
     global rr
     global toggle_button, toggle_text
 
-    if 282 <= x <= 358 and 317 <= y <= 443 and key == arcade.MOUSE_BUTTON_LEFT and rr == 1:
+    if 282 <= x <= 358 and 417 <= y <= 443 and key == arcade.MOUSE_BUTTON_LEFT and rr == -1:
         toggle_button = arcade.color.GREEN
         toggle_text = "ON"
         rr = -rr
-        print("ON")
 
-
-    elif 282 <= x <= 358 and 317 <= y <= 443 and key == arcade.MOUSE_BUTTON_LEFT and rr == -1:
+    elif 282 <= x <= 358 and 417 <= y <= 443 and key == arcade.MOUSE_BUTTON_LEFT and rr == 1:
         toggle_button = arcade.color.RED
         toggle_text = "OFF"
         rr = -rr
-        print("OFF")
 
     if 160 <= x <= 480 and 195 <= y <= 285 and key == arcade.MOUSE_BUTTON_LEFT:
         color = arcade.color.PINK
@@ -81,11 +77,12 @@ def on_draw():
     arcade.draw_rectangle_filled(320, 240, 340, 90, color)
     arcade.draw_rectangle_outline(320, 240, 340, 90, arcade.color.BLACK)
     arcade.draw_text(text, 260, 240, arcade.color.WHITE)
-    arcade.draw_text('Click somewhere else pls', 240, 400, message_color)
+    arcade.draw_text('Click somewhere else pls', 243, 400, message_color)
 
     # rr:
+    arcade.draw_text('Enable Russian Roulette Mode?', 230, 460, arcade.color.BLACK, 12)
     arcade.draw_rectangle_filled(WIDTH / 2, HEIGHT - 50, 75, 25, toggle_button)
-    arcade.draw_text(toggle_text, 305, 425, arcade.color.WHITE, 11)
+    arcade.draw_text(toggle_text, 308, 425, arcade.color.WHITE, 11)
 
 
 def setup():
