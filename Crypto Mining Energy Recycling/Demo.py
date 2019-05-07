@@ -124,6 +124,9 @@ def on_draw():
         red += 1.54
         green -= 1.54
 
+    if pressure % 55 == 0:
+        arcade.draw_text('Valve Open', 575, 680, arcade.color.RED, 20)
+
 
 
 
