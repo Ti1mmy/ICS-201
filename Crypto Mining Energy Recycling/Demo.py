@@ -1,6 +1,5 @@
 import arcade
 import random
-import time
 
 WIDTH = 1280
 HEIGHT = 720
@@ -8,11 +7,44 @@ HEIGHT = 720
 heat = int(input('What is the power consumption of one of your miners? (W) ')) * int(input('How many miners do you have? '))
 print(f'The total amount of heat your facility generates is equivalent to {heat / 1000000} megawatts! (± {(heat / 1000000) * 0.1} megawatts)')
 
+pressure = 0
+power_output = 0
+decreasing_pressure = False
+decreasing_power = False
 def update(delta_time):
     pass
 
 
 def on_draw():
+    global pressure
+    global power_output
+    global decreasing_pressure
+    global decreasing_power
+# Logic:
+    # Pressure
+
+    if pressure == 0:
+        decreasing_pressure = False
+    if not decreasing_pressure:
+        pressure += 3
+    if pressure == 165:
+        decreasing_pressure = True
+    if decreasing_pressure:
+        pressure -= 55
+
+    # Power
+    if power_output == 0:
+        decreasing_power = False
+    if pressure == 18:
+        decreasing_power = False
+    if not decreasing_power and pressure > 21:
+        power_output += 2
+    if pressure == 55:
+        decreasing_power = True
+    if decreasing_power:
+        power_output = (power_output // 3)
+    print(power_output)
+
     arcade.start_render()
 # Loading Sprites
     # General
@@ -33,7 +65,8 @@ def on_draw():
     arcade.draw_texture_rectangle(990, 505, 30, 30, barometer)  # Pressure
     arcade.draw_texture_rectangle(1100, 505, 30, 30, power)  # Power output
     # Bars
-
+    arcade.draw_line(990, 525, 990, 526 + pressure, arcade.color.BLUE, 25)
+    arcade.draw_line(1100, 525, 1100, 526 + power_output, arcade.color.RED, 25)
 # Container
     arcade.draw_texture_rectangle(250, 235, 200, 110, liquid)  # Liquid
     arcade.draw_rectangle_filled(250, 180, 200, 35, arcade.color.WHITE)  # Covers the bit that extends too much
@@ -68,21 +101,7 @@ def on_draw():
     arcade.draw_rectangle_outline(250, 360, 50, 75, arcade.color.BLACK, 7)  # Tubing
     arcade.draw_rectangle_filled(250, 360, 43, 87, arcade.color.WHITE)  # Removing Lines
 
-    # # Logic:
-    pressure = 165  # change to 0
-    # temperature = 0
-    #
-    # thermal = heat / 1000000
-    #
-    # if pressure == 165:
-    #     while pressure > 0:
-    #         pressure -= 3
-    #         time.sleep(0.091)
-    # else:
-    #     while pressure < 165:
-    #         pressure += 1
-    #         time.sleep(0.02)
-    # print(pressure)
+
 
     # Piston Movement
 
@@ -103,6 +122,7 @@ def on_draw():
 
 
 
+
 def on_key_press(key, modifiers):
     pass
 
@@ -118,7 +138,7 @@ def on_mouse_press(x, y, button, modifiers):
 def setup():
     arcade.open_window(WIDTH, HEIGHT, 'Power recycling demo')
     arcade.set_background_color(arcade.color.WHITE)
-    arcade.schedule(update, 1/60)
+    arcade.schedule(update, 1/180)
 
     # Override arcade window methods
     window = arcade.get_window()
