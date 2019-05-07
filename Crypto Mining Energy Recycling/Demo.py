@@ -11,6 +11,7 @@ pressure = 0
 power_output = 0
 decreasing_pressure = False
 decreasing_power = False
+
 def update(delta_time):
     pass
 
@@ -20,6 +21,7 @@ def on_draw():
     global power_output
     global decreasing_pressure
     global decreasing_power
+
 # Logic:
     # Pressure
 
@@ -46,6 +48,7 @@ def on_draw():
     print(power_output)
 
     arcade.start_render()
+
 # Loading Sprites
     # General
     arrow = arcade.load_texture('arrow.png', 0, 0, 512, 512)
@@ -59,14 +62,17 @@ def on_draw():
 
     # Gas
     gas = arcade.load_texture('gas.png', 0, 0, 512, 512)
+
 # Graphs
     arcade.draw_line(950, 525, 1150, 525, arcade.color.BLACK, 1)  # x - axis
     arcade.draw_line(950, 525, 950, 690, arcade.color.BLACK, 1)  # y - axis
     arcade.draw_texture_rectangle(990, 505, 30, 30, barometer)  # Pressure
     arcade.draw_texture_rectangle(1100, 505, 30, 30, power)  # Power output
+
     # Bars
     arcade.draw_line(990, 525, 990, 526 + pressure, arcade.color.BLUE, 25)
     arcade.draw_line(1100, 525, 1100, 526 + power_output, arcade.color.RED, 25)
+
 # Container
     arcade.draw_texture_rectangle(250, 235, 200, 110, liquid)  # Liquid
     arcade.draw_rectangle_filled(250, 180, 200, 35, arcade.color.WHITE)  # Covers the bit that extends too much
@@ -100,8 +106,6 @@ def on_draw():
     arcade.draw_xywh_rectangle_outline(150, 400, 200, 120, arcade.color.BLACK, 7)  # Piston Section 1
     arcade.draw_rectangle_outline(250, 360, 50, 75, arcade.color.BLACK, 7)  # Tubing
     arcade.draw_rectangle_filled(250, 360, 43, 87, arcade.color.WHITE)  # Removing Lines
-
-
 
     # Piston Movement
 
