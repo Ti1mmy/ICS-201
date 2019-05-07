@@ -1,3 +1,13 @@
+# TO DO:
+#   Draw release chamber box ( for the quick expantion to occur
+#   Draw fluid recytcling tube
+#   Draw piston
+#   Figure out how the valves would open to allow for the fluid to get into the thing.
+
+
+
+
+
 import arcade
 import random
 
@@ -107,19 +117,26 @@ def on_draw():
     arcade.draw_rectangle_outline(250, 360, 50, 75, arcade.color.BLACK, 7)  # Tubing
     arcade.draw_rectangle_filled(250, 360, 43, 87, arcade.color.WHITE)  # Removing Lines
 
-    # Piston Movement
+    # Piston
+    y_piston = (pressure / 165) * 45
+    arcade.draw_xywh_rectangle_filled(154, 402, 193, 70, arcade.color.LIGHT_BLUE)
+    arcade.draw_xywh_rectangle_filled(154, (402 + y_piston), 193, 70, arcade.color.LIGHT_GRAY)
+    arcade.draw_xywh_rectangle_filled(154, (416 + y_piston), 193, 20, arcade.color.GRAY)
+    # Shaft
+    arcade.draw_rectangle_filled(250.5, (545 + y_piston), 30, 150, arcade.color.LIGHT_GRAY)
+
 
 # Pressure Bar
 
-    arcade.draw_rectangle_outline(600, 450, 40, 370, arcade.color.BLACK, 7)
-    arcade.draw_texture_rectangle(550, 598, 20, 20, arrow)  # arrow is positioned at 330 because 2x 165
+    arcade.draw_rectangle_outline(1000, 250, 40, 370, arcade.color.BLACK, 7)
+    arcade.draw_texture_rectangle(960, 390, 20, 20, arrow)  # arrow is positioned at 330 because 2x 165
     # Gradient
     red = 0
     green = 255
     blue = 0
-    y_gradient = 268.5
+    y_gradient = 68
     for i in range(pressure):
-        arcade.draw_line(583.5, y_gradient, 616.5, y_gradient, [red, green, blue], 2)
+        arcade.draw_line(983, y_gradient, 1016, y_gradient, [red, green, blue], 2)
         y_gradient += 2
         red += 1.54
         green -= 1.54
