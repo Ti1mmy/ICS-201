@@ -73,6 +73,8 @@ def on_draw():
     # Gas
     gas = arcade.load_texture('gas.png', 0, 0, 512, 512)
 
+    # Condensation
+    drop = arcade.load_texture('condensation.png', 0, 0, 400, 428)
 # Graphs
     arcade.draw_line(950, 525, 1150, 525, arcade.color.BLACK, 1)  # x - axis
     arcade.draw_line(950, 525, 950, 690, arcade.color.BLACK, 1)  # y - axis
@@ -125,6 +127,20 @@ def on_draw():
     # Shaft
     arcade.draw_rectangle_filled(250.5, (545 + y_piston), 30, 150, arcade.color.LIGHT_GRAY)
 
+# Pressure Release things
+    arcade.draw_xywh_rectangle_outline(400, 400, 400, 120, arcade.color.BLACK, 7)
+    arcade.draw_xywh_rectangle_outline(350, 425, 70, 15, arcade.color.BLACK, 7)
+    if decreasing_pressure:
+        arcade.draw_rectangle_filled(400, 432, 20, 8, arcade.color.WHITE)
+        arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
+        arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
+        arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
+        arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
+        arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
+        arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
+        arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
+        arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
+    arcade.draw_line(320, 280, 410, 400, arcade.color.BLACK, 8)
 
 # Pressure Bar
 
