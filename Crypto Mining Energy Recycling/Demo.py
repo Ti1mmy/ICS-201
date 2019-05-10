@@ -1,18 +1,13 @@
 # TO DO:
-#   Draw release chamber box ( for the quick expantion to occur
-#   Draw fluid recytcling tube
-#   Draw piston
-#   Figure out how the valves would open to allow for the fluid to get into the thing.
-
-
-
-
+#   Annotate Code
 
 import arcade
 import random
 
 WIDTH = 1280
 HEIGHT = 720
+
+#  Total facility power draw conversion
 
 heat = int(input('What is the power consumption of one of your miners? (W) ')) * int(input('How many miners do you have? '))
 print(f'The total amount of heat your facility generates is equivalent to {heat / 1000000} megawatts! (± {(heat / 1000000) * 0.1} megawatts)')
@@ -27,6 +22,7 @@ def update(delta_time):
 
 
 def on_draw():
+
     global pressure
     global power_output
     global decreasing_pressure
@@ -34,7 +30,6 @@ def on_draw():
 
 # Logic:
     # Pressure
-
     if pressure == 0:
         decreasing_pressure = False
     if not decreasing_pressure:
@@ -75,6 +70,7 @@ def on_draw():
 
     # Condensation
     drop = arcade.load_texture('condensation.png', 0, 0, 400, 428)
+
 # Graphs
     arcade.draw_line(950, 525, 1150, 525, arcade.color.BLACK, 1)  # x - axis
     arcade.draw_line(950, 525, 950, 690, arcade.color.BLACK, 1)  # y - axis
@@ -121,17 +117,19 @@ def on_draw():
 
     # Piston
     y_piston = (pressure / 165) * 45
-    arcade.draw_xywh_rectangle_filled(154, 402, 193, 70, arcade.color.LIGHT_BLUE)
-    arcade.draw_xywh_rectangle_filled(154, (402 + y_piston), 193, 70, arcade.color.LIGHT_GRAY)
-    arcade.draw_xywh_rectangle_filled(154, (416 + y_piston), 193, 20, arcade.color.GRAY)
+    arcade.draw_xywh_rectangle_filled(154, 402, 193, 70, arcade.color.LIGHT_BLUE)  # 'Gas'
+    arcade.draw_xywh_rectangle_filled(154, (402 + y_piston), 193, 70, arcade.color.LIGHT_GRAY)  # Piston
+    arcade.draw_xywh_rectangle_filled(154, (416 + y_piston), 193, 20, arcade.color.GRAY)  # Gasket to prevent leaking
+
     # Shaft
     arcade.draw_rectangle_filled(250.5, (545 + y_piston), 30, 150, arcade.color.LIGHT_GRAY)
 
 # Pressure Release things
-    arcade.draw_xywh_rectangle_outline(400, 400, 400, 120, arcade.color.BLACK, 7)
-    arcade.draw_xywh_rectangle_outline(350, 425, 70, 15, arcade.color.BLACK, 7)
+    arcade.draw_xywh_rectangle_outline(400, 400, 400, 120, arcade.color.BLACK, 7)  # Release container (more volume than the storage container
+    arcade.draw_xywh_rectangle_outline(350, 425, 70, 15, arcade.color.BLACK, 7)  # Connecting tube
     if decreasing_pressure:
-        arcade.draw_rectangle_filled(400, 432, 20, 8, arcade.color.WHITE)
+        arcade.draw_rectangle_filled(400, 432, 20, 8, arcade.color.WHITE)  # Valve Open Close
+        # Water drops -> Condensation
         arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
         arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
         arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
@@ -140,13 +138,13 @@ def on_draw():
         arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
         arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
         arcade.draw_texture_rectangle(random.randint(410, 780), random.randint(410, 460), 20, 25, drop)
-    arcade.draw_line(320, 280, 410, 400, arcade.color.BLACK, 8)
+    arcade.draw_line(320, 280, 410, 400, arcade.color.BLACK, 8) # Refill tube
 
 # Pressure Bar
 
-    arcade.draw_rectangle_outline(1000, 250, 40, 370, arcade.color.BLACK, 7)
+    arcade.draw_rectangle_outline(1000, 250, 40, 370, arcade.color.BLACK, 7)  # Bar outline
     arcade.draw_texture_rectangle(960, 390, 20, 20, arrow)  # arrow is positioned at 330 because 2x 165
-    # Gradient
+    # Gradient for pressure. Green  = low pressure, red = high pressure
     red = 0
     green = 255
     blue = 0
@@ -158,7 +156,7 @@ def on_draw():
         green -= 1.54
 
     if pressure % 55 == 0:
-        arcade.draw_text('Valve Open', 575, 680, arcade.color.RED, 20)
+        arcade.draw_text('Valve Open', 575, 680, arcade.color.RED, 20)  # Indicates if valve is open or closed
 
 
 
