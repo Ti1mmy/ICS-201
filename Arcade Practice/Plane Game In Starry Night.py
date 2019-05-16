@@ -19,7 +19,7 @@ for i in range(10):
 def setup():
     arcade.open_window(WIDTH, HEIGHT, "Plane starry knight")
     arcade.set_background_color(arcade.color.DARK_MIDNIGHT_BLUE)
-    arcade.schedule(update, 1/60)
+    arcade.schedule(update, 1 / 60)
 
     # Override arcade window methods
     window = arcade.get_window()
@@ -45,8 +45,10 @@ def update(delta_time):
         if keyup:
             y_plane += 8
     for detect in range(len(star_x_positions)):
-        if (star_x_positions[detect]in range(200, 300)) and (star_y_positions[detect] in range(int(y_plane - 50, y_plane + 50))):
-            print('boom')
+        if (star_x_positions[detect] - 50 <= 250 <= star_x_positions[detect] + 50) and (
+                star_y_positions[detect] - 50 <= y_plane <= star_y_positions[detect] + 50):
+            print("boom")
+
 
 def on_draw():
     arcade.start_render()
@@ -72,6 +74,7 @@ def on_key_release(key, modifiers):
         keydown = False
     if key == arcade.key.UP:
         keyup = False
+
 
 def on_mouse_press(x, y, button, modifiers):
     pass
