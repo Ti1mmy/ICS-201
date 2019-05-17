@@ -9,8 +9,11 @@ star_y_positions = []
 y_plane = HEIGHT / 2
 keydown = False
 keyup = False
+boom = False
+frametime = 0
+SPEED = 4
 for i in range(10):
-    x = random.randrange(0, WIDTH * 2)
+    x = random.randrange(WIDTH / 2, WIDTH * 2)
     y = random.randrange(HEIGHT)
     star_x_positions.append(x)
     star_y_positions.append(y)
@@ -33,8 +36,11 @@ def setup():
 
 def update(delta_time):
     global y_plane
+    global boom
+    global frametime, SPEED
+    frametime += 1
     for x_range in range(len(star_x_positions)):
-        star_x_positions[x_range] -= 4
+        star_x_positions[x_range] -= SPEED
         if star_x_positions[x_range] <= 0:
             star_y_positions[x_range] = random.randrange(0, HEIGHT)
             star_x_positions[x_range] = random.randrange(WIDTH, WIDTH * 2)
@@ -47,8 +53,10 @@ def update(delta_time):
     for detect in range(len(star_x_positions)):
         if (star_x_positions[detect] - 50 <= 250 <= star_x_positions[detect] + 50) and (
                 star_y_positions[detect] - 50 <= y_plane <= star_y_positions[detect] + 50):
-            print("boom")
+            arcade.close_window()
 
+    if frametime % 120 == 0:
+        SPEED += 0.35
 
 def on_draw():
     arcade.start_render()
@@ -56,7 +64,7 @@ def on_draw():
         arcade.draw_circle_filled(x_star, y_star, 2, arcade.color.WHITE)
     plane = arcade.load_texture('plane.png', 0, 0, 420, 420)
     arcade.draw_texture_rectangle(250, y_plane, 100, 100, plane)
-
+    arcade.draw_text(str(frametime), 1200, 700, arcade.color.WHITE)
 
 def on_key_press(key, modifiers):
     global keydown
