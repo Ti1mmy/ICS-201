@@ -58,6 +58,7 @@ def update(delta_time):
     if frametime % 120 == 0:
         SPEED += 0.35
 
+
 def on_draw():
     arcade.start_render()
     for x_star, y_star in zip(star_x_positions, star_y_positions):
@@ -65,6 +66,7 @@ def on_draw():
     plane = arcade.load_texture('plane.png', 0, 0, 420, 420)
     arcade.draw_texture_rectangle(250, y_plane, 100, 100, plane)
     arcade.draw_text(str(frametime), 1200, 700, arcade.color.WHITE)
+
 
 def on_key_press(key, modifiers):
     global keydown
